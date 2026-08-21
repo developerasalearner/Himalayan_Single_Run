@@ -1,0 +1,72 @@
+{
+  "_README": [
+    "The subset from the leakage-ablation run, in which termreason was NOT",
+    "excluded. Extracted from the earlier notebook revision's outputs.",
+    "",
+    "Important: this is not the main subset plus termreason. Readmitting the",
+    "field enlarged the screened column set from 47 to 48, so the search ran",
+    "again and settled on 35 features rather than 34. Section V-E's figures",
+    "come from this subset."
+  ],
+  "metadata": {
+    "source": "leakage-ablation run (earlier notebook revision)",
+    "seed": 42,
+    "termreason_excluded": false,
+    "screened_feature_count": 48,
+    "reported_final": {
+      "accuracy": 0.9168,
+      "precision": 0.3005,
+      "recall": 0.4238,
+      "f1": 0.3516,
+      "confusion_matrix": [
+        [
+          2538,
+          149
+        ],
+        [
+          87,
+          64
+        ]
+      ]
+    }
+  },
+  "features": {
+    "FOA_GWO": [
+      "year",
+      "season",
+      "disputed",
+      "totdays",
+      "termreason",
+      "parapente",
+      "camps",
+      "totmembers",
+      "nohired",
+      "o2used",
+      "o2descent",
+      "o2sleep",
+      "o2medical",
+      "o2taken",
+      "o2unkwn",
+      "comrte",
+      "stdrte",
+      "primmem",
+      "temp_std",
+      "snow_total",
+      "snow_max",
+      "wind_mean",
+      "extreme_wind_days",
+      "pressure_mean",
+      "rapid_warming_days",
+      "oxygen_used",
+      "oxygen_free_ascent",
+      "technical_difficulty",
+      "is_standard_route",
+      "is_commercial_route",
+      "season_Autumn",
+      "season_Summer",
+      "season_Unknown",
+      "season_Winter",
+      "temp_mean_missing"
+    ]
+  }
+}

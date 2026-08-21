@@ -1,0 +1,31 @@
+# =====================================================================
+# Pinned environment for reproducing the reported results.
+#
+#   python -m venv .venv && source .venv/bin/activate
+#   pip install -r requirements.txt
+#
+# The upper bound on scikit-learn is deliberate. Version 1.8 deprecated
+# LogisticRegression's `penalty` argument in favour of `l1_ratio`, and
+# passing the old spelling there silently mixes in an L2 term, which
+# changes which features survive the embedded stage. The code detects
+# the version and adapts, so newer releases will run - but the numbers
+# in the paper come from this range.
+# =====================================================================
+
+numpy>=1.24,<2.0
+pandas>=2.0,<3.0
+scikit-learn>=1.3,<1.8
+xgboost>=2.0,<3.0
+imbalanced-learn>=0.11,<0.13
+matplotlib>=3.7,<4.0
+seaborn>=0.12,<0.14
+pyarrow>=12.0
+PyYAML>=6.0
+joblib>=1.3
+
+# Only needed by scripts/00_download_data.py. Drop it if you fetch the
+# archives by hand; see docs/DATA.md.
+kagglehub>=0.3.0
+
+# Development only.
+pytest>=7.4

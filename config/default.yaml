@@ -1,0 +1,106 @@
+# =====================================================================
+# Default configuration for the Himalayan expedition risk pipeline.
+#
+# Every number that affects a reported result lives here. Override any
+# key on the command line, e.g.:
+#     python scripts/run_all.py --set seed=7 --set leakage.exclude_termreason=false
+# =====================================================================
+
+seed: 42
+
+paths:
+  # Directory holding exped.csv / peaks.csv / members.csv
+  expeditions_dir: "data/raw/himalayan-expeditions"
+  # Directory holding one <PEAKID>.parquet per peak
+  weather_dir: "data/raw/historic-weather-data-for-himalayan-peaks"
+  # Everything the pipeline writes
+  processed_dir: "data/processed"
+  results_dir: "results"
+  figures_dir: "figures"
+  artifacts_dir: "artifacts"
+
+compute:
+  # "auto" picks cuda when a GPU is visible to XGBoost, otherwise cpu.
+  # Force with "cpu" or "cuda". Results are numerically identical on
+  # either device for these tree sizes; only runtime differs.
+  device: "auto"
+  n_jobs: 1
+
+data:
+  # Sort each peak's weather frame by date before slicing. The day-to-day
+  # temperature difference used for rapid-warming days is order-dependent,
+  # so this makes the feature well-defined regardless of file ordering.
+  sort_weather_by_date: true
+
+features:
+  heavy_snow_mm: 10.0          # snowfall above this counts as a heavy-snow day
+  extreme_wind_kmh: 70.0       # wind_speed_100m above this counts as extreme
+  rapid_warming_delta_c: 5.0   # day-over-day temperature rise above this counts
+  storm_weather_code_min: 70   # weather_code at or above this counts as a storm day
+
+leakage:
+  # Fields that encode the outcome itself. Excluded before any modelling.
+  exclude_fields:
+    - mdeaths
+    - hdeaths
+    - death_rate
+    - severe_outcome
+    - smtmembers
+    - success1
+    - success2
+    - success3
+    - success4
+  # termreason is handled separately because Section V-E readmits it.
+  # true  -> paper's main results   (ROC-AUC ~0.696, AP ~0.155)
+  # false -> paper's leakage ablation (ROC-AUC ~0.786, AP ~0.339)
+  exclude_termreason: true
+
+preprocess:
+  correlation_threshold: 0.90
+  test_size: 0.30
+  stratify: true
+
+selection:
+  # Inner split used to score candidate feature masks. The test partition
+  # is never touched during search.
+  inner_val_size: 0.20
+  surrogate:
+    n_estimators: 50
+    max_depth: 6
+    learning_rate: 0.1
+  fitness:
+    w_recall: 0.5
+    w_f1: 0.3
+    w_precision: 0.2
+    size_penalty: 0.02       # lambda in Eq. 5
+  population_size: 20
+  iterations: 30
+  optimizers: [GA, PSO, GWO, EVO, FOA, FOA_GWO]
+  embedded:
+    cv_folds: 5
+    n_estimators: 100
+    max_depth: 4
+    learning_rate: 0.1
+  # If artifacts/selected_features.json exists, load it instead of
+  # re-running the stochastic search. Set false to always re-search.
+  reuse_frozen_features: true
+
+imbalance:
+  methods: [Baseline, SMOTE, ADASYN, SMOTEENN, SMOTETomek, UnderSampling]
+  # Table III: own threshold per method, chosen by maximising minority F1
+  threshold_grid: {low: 0.10, high: 0.30, points: 41}
+
+calibration:
+  method: "sigmoid"
+  cv: 3
+  # Table IV: threshold chosen by maximising 0.6*recall + 0.4*precision
+  threshold_grid: {low: 0.10, high: 0.20, points: 41}
+  objective: {w_recall: 0.6, w_precision: 0.4}
+  compare_methods: [Baseline, SMOTEENN, SMOTETomek]
+
+final:
+  # Section III-I: the single configuration behind every final number.
+  selector: "FOA_GWO"
+  imbalance: "Baseline"      # class weighting, no resampling
+  calibrate: true
+  threshold: 0.110

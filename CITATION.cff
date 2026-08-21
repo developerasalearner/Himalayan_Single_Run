@@ -1,0 +1,57 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the paper below."
+title: "Weather-Aware Imbalanced Risk Prediction on Himalayan Expeditions"
+abstract: >-
+  Reproduction code for a retrospective, expedition-level fatality-risk
+  classification pipeline combining weather-aware feature construction,
+  sequential FOA-GWO hybrid metaheuristic feature selection, a comparison of six
+  imbalance treatments, and post-hoc probability calibration, with a leakage
+  ablation quantifying the effect of post-outcome archival fields.
+type: software
+license: MIT
+version: 1.0.0
+repository-code: "https://github.com/REPLACE_ME/himalayan-expedition-risk"
+
+authors:
+  - family-names: Palo
+    given-names: Chinmaya Kumar
+    affiliation: "Veer Surendra Sai University of Technology, Burla, Odisha, India"
+    email: chinmayakumarpalo.official@gmail.com
+  - family-names: Palo
+    given-names: Tusharkanta
+    affiliation: "Silicon University, Bhubaneswar, Odisha, India"
+  - family-names: Behera
+    given-names: Himansu Sekhar
+    affiliation: "Veer Surendra Sai University of Technology, Burla, Odisha, India"
+
+keywords:
+  - imbalanced classification
+  - hybrid feature selection
+  - grey wolf optimizer
+  - forest optimization algorithm
+  - probability calibration
+  - data leakage
+  - retrospective risk classification
+
+# Update this block once the paper is accepted: fill in the DOI, page
+# numbers and final conference details, then flip the repository to public.
+preferred-citation:
+  type: conference-paper
+  title: >-
+    Hybrid Metaheuristic Feature Selection and Probabilistic Calibration for
+    Weather-Aware Imbalanced Risk Prediction: A Case Study on Himalayan
+    Expeditions
+  authors:
+    - family-names: Palo
+      given-names: Chinmaya Kumar
+    - family-names: Palo
+      given-names: Tusharkanta
+    - family-names: Behera
+      given-names: Himansu Sekhar
+  year: 2026
+  collection-title: "Proceedings of MINDS 2026"
+  publisher:
+    name: IEEE
+  # doi: "REPLACE_ME"
+  # start: REPLACE_ME
+  # end: REPLACE_ME
