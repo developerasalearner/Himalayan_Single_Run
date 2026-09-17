@@ -43,8 +43,7 @@ and unaffected. The pipeline reproduces that protocol as published; see
 ## Quick start
 
 ```bash
-git clone <your-repo-url> && cd himalayan-expedition-risk
-
+git clone https://github.com/developerasalearner/Himalayan_Single_Run.git && cd Himalayan_Single_Run
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
