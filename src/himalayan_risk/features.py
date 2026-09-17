@@ -95,7 +95,13 @@ def summarise_weather(
     rapid_warming_delta_c: float = 5.0,
     storm_weather_code_min: int = 70,
 ) -> Dict[str, float]:
-    """Compress one expedition's weather slice into climate descriptors.
+       """Compress one expedition's weather slice into climate descriptors.
+
+    The archive is hourly, so the four `_days` counters tally matching
+    records, not calendar days; the names are kept to match the published
+    feature lists. On the real data `heavy_snow_days` and
+    `extreme_wind_days` are zero everywhere, because no hourly record
+    reaches 10 cm of snowfall or 70 km/h of wind.
 
     Returns all-NaN when no usable interval could be reconstructed; those
     rows are flagged rather than deleted, since a missing interval is
