@@ -1,7 +1,7 @@
 """Loading the two source archives.
 
 Expedition history comes from a public mirror of the Himalayan Database;
-daily meteorological series come from a companion weather archive, one
+hourly meteorological series come from a companion weather archive, one
 parquet file per peak, named by peak identifier.
 """
 
