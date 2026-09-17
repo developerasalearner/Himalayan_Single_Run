@@ -95,7 +95,7 @@ def summarise_weather(
     rapid_warming_delta_c: float = 5.0,
     storm_weather_code_min: int = 70,
 ) -> Dict[str, float]:
-"""Compress one expedition's weather slice into climate descriptors.
+    """Compress one expedition's weather slice into climate descriptors.
 
     The archive is hourly, so the four `_days` counters tally matching
     records, not calendar days; the names are kept to match the published
