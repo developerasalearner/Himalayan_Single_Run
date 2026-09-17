@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Stage 1 - build the modelling table and report the split.
 
-Joins expedition records to daily weather through peak codes and recorded
+Joins expedition records to hourly weather through peak codes and recorded
 intervals, engineers the climate and vulnerability descriptors, applies
 the outcome-field exclusion rule, imputes, encodes and screens for
 redundancy.
