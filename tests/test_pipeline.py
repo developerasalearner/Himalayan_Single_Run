@@ -159,8 +159,8 @@ def test_summarise_weather_on_missing_slice():
 def test_event_counters_use_configured_thresholds():
     frame = pd.DataFrame({
         "temperature_2m": [0.0, 6.0, 6.5, -10.0],   # one jump above +5
-        "snowfall": [0.0, 12.0, 3.0, 40.0],          # two days above 10 mm
-        "wind_speed_100m": [10.0, 80.0, 90.0, 5.0],  # two days above 70
+        "snowfall": [0.0, 12.0, 3.0, 40.0],          # two records above 10
+        "wind_speed_100m": [10.0, 80.0, 90.0, 5.0],  # two records above 70
         "surface_pressure": [400.0, 401.0, 402.0, 403.0],
         "weather_code": [1, 75, 80, 2],              # two codes at or above 70
     })
