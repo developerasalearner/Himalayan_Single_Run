@@ -28,16 +28,19 @@ compute:
   n_jobs: 1
 
 data:
-  # Sort each peak's weather frame by date before slicing. The day-to-day
-  # temperature difference used for rapid-warming days is order-dependent,
-  # so this makes the feature well-defined regardless of file ordering.
+  # Sort each peak's weather frame by date before slicing. The hour-to-hour
+  # temperature difference used for the rapid-warming counter is order-
+  # dependent, so this makes the feature well-defined regardless of file
+  # ordering. The published parquet files already arrive sorted.
   sort_weather_by_date: true
 
 features:
-  heavy_snow_mm: 10.0          # snowfall above this counts as a heavy-snow day
-  extreme_wind_kmh: 70.0       # wind_speed_100m above this counts as extreme
-  rapid_warming_delta_c: 5.0   # day-over-day temperature rise above this counts
-  storm_weather_code_min: 70   # weather_code at or above this counts as a storm day
+  # The archive is hourly, so these counters tally records, not days. The
+  # _mm suffix is a misnomer kept for compatibility: snowfall is in cm.
+  heavy_snow_mm: 10.0          # snowfall (cm) in one hourly record; never reached (max 7.2)
+  extreme_wind_kmh: 70.0       # wind_speed_100m (km/h) in one record; never reached (max 47.2)
+  rapid_warming_delta_c: 5.0   # temperature rise over the previous hourly record
+  storm_weather_code_min: 70   # weather_code at or above this (WMO snowfall codes)
 
 leakage:
   # Fields that encode the outcome itself. Excluded before any modelling.
