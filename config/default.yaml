@@ -21,8 +21,9 @@ paths:
 
 compute:
   # "auto" picks cuda when a GPU is visible to XGBoost, otherwise cpu.
-  # Force with "cpu" or "cuda". Results are numerically identical on
-  # either device for these tree sizes; only runtime differs.
+  # Force with "cpu" or "cuda". The device changes the numbers: the
+  # published results are the cuda ones, and a CPU rerun gives ROC-AUC
+  # 0.706 / AP 0.147 instead of 0.696 / 0.155. See docs/REPRODUCIBILITY.md.
   device: "auto"
   n_jobs: 1
 
