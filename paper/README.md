@@ -23,10 +23,13 @@ Add here:
 Then:
 
 1. Fill in the DOI, pages and repository URL in `CITATION.cff`.
-2. Replace `artifacts/selected_features.json` with the real subsets from the
-   manuscript run, if that has not been done already — see
-   `docs/REPRODUCIBILITY.md`.
-3. Resolve the two open discrepancies recorded in `docs/PAPER_MAPPING.md`
-   (Equation 4's stated objective, and the archived notebook's missing
-   `termreason` exclusion).
+2. Check that the repository URL printed in Section IV of the manuscript matches
+   the public repository name exactly.
+3. Confirm `artifacts/selected_features.json` and
+   `artifacts/selected_features_ablation.json` still hold the manuscript-run
+   subsets — see `docs/REPRODUCIBILITY.md`.
 4. Flip the repository to public.
+
+The discrepancies that earlier revisions of `docs/PAPER_MAPPING.md` listed as open
+are resolved in the current manuscript and recorded there under *Resolved
+discrepancies*. Nothing in that list is outstanding.
