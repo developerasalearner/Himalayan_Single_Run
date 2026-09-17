@@ -3,7 +3,7 @@
 Three stages, in order:
 
 1. Temporal alignment - resolve each expedition's recorded interval and
-   slice the matching peak's daily weather series to it.
+   slice the matching peak's hourly weather series to it.
 2. Climate descriptors - compress each slice into summary statistics and
    event counters that averages would otherwise hide.
 3. Vulnerability descriptors - party size, exposure, camp density, route
